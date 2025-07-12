@@ -5,7 +5,6 @@ def SelectionSort():
         element = int(input("Enter element "+ str(i+1) +" : "))
         array.append(element)
 
-
     print(array)
 
     for i in range(n):
@@ -17,7 +16,6 @@ def SelectionSort():
             temp = array[i]
             array[i] = array[CurrentMinIndex]
             array[CurrentMinIndex] = temp
-
 
     print(array)
 

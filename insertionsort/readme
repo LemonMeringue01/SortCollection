@@ -1,0 +1,52 @@
+Insertion Sort - Python, Java and C versions
+
+About Insertion sort:
+    inventor/history:
+        from https://hideoushumpbackfreak.com/algorithms/sorting-insertion.html
+        "The origin of insertion sort is difficult to ascertain as it pre-dates computing. However, it’s first use in a computation context traces back to 1945 when Konrad Zuse defined it as a primitive for the first high-level programming language: Plankalkül. The word Plankalkül is roughly translated to “program calculus”. Although Zuse meticulously defined the language, it was never actually implemented. It’s unfortunate that world was never able to actually use the first high-level programming language."
+
+    Idea behind process:
+        again, comparisons. Work looking at each value and compare it to the values before it in the array, do swaps based on that.
+
+    benefits:
+        Simplicity. This one benefits from pre-sortedness, so can be used to speed up other algorithms when their output is nearly sorted.
+
+    
+    process:
+        starting from index [1], you take each value of the array, and compare it to those that come before it. 
+        in  index [1]'s case, you will compare it to index [0]'s value.
+        you take the selected element. For each value that comes before it, if the selected element is smaller than the value before it, the value before it moves up - right - to make space for the selected element. once the selected element meets a value which is equal or less than it, it is inserted after this equal/less than value, where space has been made for it. It also gets placed at the end of comparisons, if there were none that were smaller than it.
+
+        2 loops:
+            one to repeat process for each element of the array from [1] onwards - [0] has nothing before it - [for i=1 to n-1]
+            another to do all the comparisons for the elements before the current element. - [for j=i down to 0]
+
+        Illustration:
+            array [2,7,1,5,9,4]
+            take array[1], 7.
+            compare it to those before, in this case [2]. 
+            2<7, therefore 2 does not move, and 7 is inserted after it - it remains in place, array[1].
+
+            take array[2], 1.
+            compare it to those before, in this case [2,7]. 
+            7>1, therefore 7 moves up - [2,_,7], so to speak.
+            2>1, therefore 2 moves up - [_,2,7], so to speak.
+            all comparisons done, place 1 into the space - [1,2,7], or [1,2,7,5,9,4]
+
+            take array[3], 5.
+            compare it to those before, in this case [1,2,7].
+            7>5, therefore 7 moves up - [1,2,_,7], so to speak.
+            2<5, therefore 2 does not move, and 5 is inserted after it - into the space - [1,2,5,7], or [1,2,5,7,9,4]
+
+            continue...
+
+
+            **as you can see, if the previous values are smaller, fewer comparisons and movements take place.
+            This is why the algorithm benefits from presortedness. Useful.
+
+    Extra Details:
+        In-Place? [see selection sort readme for definition]
+            Yes! no auxiliary data structures are created, and minimal extra variables.
+        Complexity?
+            O(n^2), worst and average cases, owing to the nested loops.
+            However, the best case is O(n). The inner loop only does one pass, therefore becoming n * 1, rather than n * n.

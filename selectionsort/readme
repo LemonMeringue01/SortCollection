@@ -16,8 +16,8 @@ About Selection Sort:
 
       therefore 2 loops:
          - one to track the minimum positions/get a value for each place in the array - [for i=0  to size-1]
-         - another to track the find minimum places and stuff - comparisons, of each value. since you set the minimum as the minimum position's 
-           value at first, then start comparing the values after it, the number is one less than the first loop.
+         - another to do the comparisons, of each value. since you set the minimum as the minimum position's 
+           value at first, you start comparing the values after it, this loop loops one time less than the first loop.
               - [for j=i+1 to size-1]  
            illustration:
               for [3,7,2,5,1], in the first pass, 3 is set as the minimum at first.
@@ -36,14 +36,15 @@ About Selection Sort:
                     swap the new minimum value (1) with what was taken to be the minimum value at first - as this is the start position, index [0].
                     array[0] now equals 1
                     [1,7,2,5,3]
-                        **if 3 had been the minimum after all, it is equal to itself and therefore not moved - it remains in position [0].
+                        **if 3 had been the minimum after all, it would be equal to itself and therefore not move/be swapped - it'd remain 
+                          in position [0].
                     
                     second pass. 
                     you take 7 as the next minimum value - index[1].
                     go to compare it with the following values, [2,5,3]. as 1 is in the right place, it can be ignored. It is already established 
                     that it is the lowest minimum.
                     so on and so forth, do the comparisons to find the second minimum and place it in index [1].
-                    sorted.
+                    continue until sorted.
 
    
    Extra Details:
