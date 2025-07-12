@@ -17,9 +17,11 @@ About Insertion sort:
         in  index [1]'s case, you will compare it to index [0]'s value.
         you take the selected element. For each value that comes before it, if the selected element is smaller than the value before it, the value before it moves up - right - to make space for the selected element. once the selected element meets a value which is equal or less than it, it is inserted after this equal/less than value, where space has been made for it. It also gets placed at the end of comparisons, if there were none that were smaller than it.
 
+        if not using a while loop to find where to insert the element, [while array[j]>elemToCompare], you need to keep track of the index you would insert the element. this is i unless values get moved.
+
         2 loops:
             one to repeat process for each element of the array from [1] onwards - [0] has nothing before it - [for i=1 to n-1]
-            another to do all the comparisons for the elements before the current element. - [for j=i down to 0]
+            another to do all the comparisons for the elements before the current element. - [for j=i-1 down to (including) 0]
 
         Illustration:
             array [2,7,1,5,9,4]
@@ -47,6 +49,16 @@ About Insertion sort:
     Extra Details:
         In-Place? [see selection sort readme for definition]
             Yes! no auxiliary data structures are created, and minimal extra variables.
+        
         Complexity?
             O(n^2), worst and average cases, owing to the nested loops.
             However, the best case is O(n). The inner loop only does one pass, therefore becoming n * 1, rather than n * n.
+        
+        Stable? 
+            Yes, recall that an element is placed when it reaches an element less than or equal to it [or at the end of comparisons].
+        
+        Adaptive
+            benefits from pre-sortedness.
+            Python's 'sorted()' & 'list.sort()' functions use TimSort - a combination of Merge and Insertion sort. 
+        
+        Deterministic - same output for same input.

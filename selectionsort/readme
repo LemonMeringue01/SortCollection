@@ -62,7 +62,7 @@ About Selection Sort:
          [5,8,3,4,7,3] in here, if 3 at index [5] becomes the minimum, it is swapped, becoming [3,8,3,4,7,5].
          it now comes before the 3 at index [2], where it came after that before.
 
-      Non-Adaptive - does not benefit from presortedness
+      Non-Adaptive - does not benefit from pre-sortedness
       
       Deterministic - same result for same input, output is determined by input, there are no random values generated.
       
