@@ -1,0 +1,80 @@
+"""
+
+Selection Sort - Python, Java and C versions
+
+About Selection Sort:
+   inventor: Not seemingly listed. Perhaps being a simple one there is no real 'inventor'.
+   idea behind process: comparisons. 
+   benefits: Simplicity. 
+
+   process:
+      in each pass of the array, find the minimum value. 
+      predictably, at first you set the first value array[0] as minimum, then for all the other values, do comparisons to find the minimum value.
+      at the end of each pass, place this minimum value at the start, the minimum position.
+      given after each pass one value is in the right place, if dealing with values 0-5 of the array in the first pass, you deal with 1-5 in the
+      second, 2-5 in the third, and so on until sorted.
+
+      therefore 2 loops:
+         - one to track the minimum positions/get a value for each place in the array - [for i=0  to size-1]
+         - another to track the find minimum places and stuff - comparisons, of each value. since you set the minimum as the minimum position's 
+           value at first, then start comparing the values after it, the number is one less than the first loop.
+              - [for j=i+1 to size-1]  
+           illustration:
+              for [3,7,2,5,1], in the first pass, 3 is set as the minimum at first.
+              now for the comparisons to find if 3 is really the minimum, you only need to compare it with the other 4 values, not itself.
+              thus, loop for the 4 values - compare it with these 4, switching the minimum value if you come across a new minimum and 
+              continuing comparisons with this new minimum.
+                 therefore:
+                    you take 3 as minimum.
+                    you go to compare it with the rest
+                     7>3, no change
+                     2<3, now take 2 as minimum
+                       compare 2, the new minimum with 5 - 5>2, no change
+                       1<2, now take 1 as the new minimum
+
+                    you have completed the first selection of a minimum value.
+                    swap the new minimum value (1) with what was taken to be the minimum value at first - as this is the start position, index [0].
+                    array[0] now equals 1
+                    [1,7,2,5,3]
+                        **if 3 had been the minimum after all, it is equal to itself and therefore not moved - it remains in position [0].
+                    
+                    second pass. 
+                    you take 7 as the next minimum value - index[1].
+                    go to compare it with the following values, [2,5,3]. as 1 is in the right place, it can be ignored. It is already established 
+                    that it is the lowest minimum.
+                    so on and so forth, do the comparisons to find the second minimum and place it in index [1].
+                    sorted.
+
+   
+   Extra Details:
+      In-Place?  [using no auxiliary/helper data structures - not taking extra/big space]
+         yes! uses the original array and few other variables.
+      
+      Complexity?
+         2 nested loops, each dependent on size of array, n. therefore O(n^2) complexity.
+         (n*n-1)/2  which simplifies to n^2.
+
+      Stable?  [relative order of elements preserved? for example [4,5,3,4,4,6], the 3 fours should remain in their relative order, the 
+                one at index [0] should come before the ones at index [3] and [4] within the sorted array.]
+         No. not stable. Recall findinf the minimum. if there is a repeated value, the one nearer the end of the array may become the minimum, 
+         depending on implementation, and be swapped, therefore breaking the relative order.
+         [5,8,3,4,7,3] in here, if 3 at index [5] becomes the minimum, it is swapped, becoming [3,8,3,4,7,5].
+         it now comes before the 3 at index [2], where it came after that before.
+
+      Non-Adaptive - does not benefit from presortedness
+      
+      Deterministic - same result for same input, output is determined by input, there are no random values generated.
+      
+      Fewer use cases.
+      
+      Same time complexity for best, worst and average cases.
+
+
+
+
+
+
+
+
+"""
+
