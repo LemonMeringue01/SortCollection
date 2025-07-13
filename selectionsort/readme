@@ -50,6 +50,7 @@ About Selection Sort:
    Extra Details:
       In-Place?  [using no auxiliary/helper data structures - not taking extra/big space]
          yes! uses the original array and few other variables.
+         Space complexity: O(1)
       
       Complexity?
          2 nested loops, each dependent on size of array, n. therefore O(n^2) complexity.

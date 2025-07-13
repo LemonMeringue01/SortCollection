@@ -9,4 +9,83 @@ About Merge Sort:
         Divide and Conquer(see multiply and surrender)
     
     benefits:
+        Efficient, general purpose and most implementations are stable. Works well with singly linked lists. Widely used. Recall TimSort.
+    
+    Process:
+        2 methods, one calling the other. Essentially one recursively calls itself and calls the other as a final operation. 
+        MergeSort method:
+            Send in an array, with a start and end index - essentially which bits of the array need sorted when called? 
+            At the first call, this will be (array, 0, lengthOfList-1)
+            if the start index is less than the end index - if the array bit needing processed is more than 1 item long-
+            Split the array, and process each half recursively.
+            This bit is essentially splitting up the array into halves, quarters, eighths and so on to be processed.
+            Merge method:    
+                The actual processing is done with Merge.
+                This takes in an array, and three indexes such that p <= q < r 
+                essentially, it sorts the items in the array between the indexes of p and r.
+                q is the 'midpoint' - where the array is split up into left and right halves.
+                these halves are then merged - sorted by comparisons.
+            
+            array [2,7,5,1,9,3]
+            original call - [MergeSort(array, 0, (array.length())-1)]
+            as 0 is less than the end index [5], 
+            call MergeSort on each half of the array - in this case
+                MergeSort(array, 0,2)
+                MergeSort(array, 3,5)
+            You're really saying to split each half up further.
+                [2,7,5,1,9,3]
+                goes to [2,7,5] and [1,9,3]
+                they go to [2,7] and [5], as well as [1,9] and [3]
+                which go to [2], [7], as well as [1] and [9]
+            Having been split, each call then merges the sections. 
+            the merging starts at the lowest level - array sections 1 item long, as the other calls rely on these lower levels' results.
+            So the lowest ones merge - [2], [7], and [1],[9] get merged to [2,7] and [1,9]
+                                       [2,7], [5], and [1,9], [3] get merged to [2,5,7] and [1,3,9]
+                                       [2,5,7] and [1,3,9] get merged to 
+                                       [1,2,3,5,7,9] Which is the result. 
+
+            That's not the best explanation.
+            The recursion tree may be better visualisation:
+                    
+                    [2,7,5,1,9,3]
+                    |           \
+                    [2,7,5]      [1,9,3]
+                    /    \        |    \
+               [2,7]     [5]    [1,9]  [3]
+               /  \       |      /  \    \
+            [2]   [7]     |    [1]  [9]   |
+             \     /      |     \    /    |
+              [2,7]       /      [1,9]    /
+                \        /          \    /
+                  [2,5,7]           [1,3,9]
+                       \            /
+                        [1,2,3,5,7,9]
+
+            ... yeah. Maybe this isn't the best either. Hope you find a better explanation.
+
+    Extra Details:
+        In-place? 
+            Nope. This one requires copying the array when it comes to merging parts, so space complexity goes up.
+            Space Complexity: O(n) - you are dealing with the number of elements which are in the original array.
+
+        Complexity?
+            Merge runs in O(n) time. 
+            MergeSort runs on each half recursively - O(logn).
+                Therefore: O(nlogn) time.
+            Best, avg and worst case are equal.
+        Stable?
+            Yes - maintains relative order of equal elements.
+        
+        Adaptive?
+            not actually sure... I don't think so?
+            however recall TimSort - where you switch to insertion sort after a point.
+            this again has O(nlogn) as an average case,
+            however the best case for this is O(n)-where the array is already sorted.
+        
+        Deterministic?
+            Yes - given same input, get same output.
+            It is split into calculated halves, so these do not change - they are not random.
+        
+
+        it's also apparently naturally parallel. search that one yourself. a related term is 'embarrassingly parallel'
 
