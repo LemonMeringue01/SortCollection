@@ -1,0 +1,56 @@
+Quick Sort - Python, Java and C versions
+
+About Quick Sort:
+    Inventor:
+        Tony Hoare, 1959[published 1961], inspired through his work on a translation project using machines.
+    
+    Idea behind process:
+        Divide and Conquer - split it up and do comparisons of the parts.
+    
+    Benefits:
+        Efficient, has an edge on merge and heapsort in dealing with large distributions of randomized data.
+    
+    Process:
+        Take an array. 
+        Choose a 'pivot' element - it is ideal if this element's value is the median value of the array - [10,5,1] it's ideal if 5 is picked - 
+        however there is no way to easily find the median. Thus, picking the pivot can be done multiple ways, each having small effects on aspects 
+        of the algorithm. 
+        Some of these include:
+            The first or last element of the array
+            A random element of the array
+            The median of three selected values of the array
+        Split the array based on this pivot - elements smaller than it to the left <- and elements larger than it to the right ->
+        take these 2 sections, and again, find a pivot for each.
+        The structure is much like merge sort - recursively finding a pivot and splitting by comparisons.
+        Stop splitting it at the base case of only one element in the section - [3] is already sorted.
+        a visualisation will again show that the arranging of the elements starts at the lowest level/section and works back up 
+        - recall a recursion trace, how the recursive calls' outputs bounce back up to the main call.
+
+        Now. The annoying part of this algorithm is that there are many ways to 'partition' - split by comparison - the array. 
+        Some factors in your decision of which to use will be space requirements, time requirements, and simplicity of coding, etc.
+        I'm not going to try to explain them here, not now at least. As such, no illustration either, too much of a pain.
+
+    Extra Details:
+        In-Place?
+            No? Yes? - there is disagreement here, but in general this is close to in-place. Certain versions make differences.
+            The Hoare partitioning method works in-place. 
+        
+        Complexity?
+            O(nlogn) best and average case
+            O(n^2) with a mostly sorted list - recall insertion sort's usefullness here.
+                This is where the pivot, chosen at each split, causes a split into two arrays [nothing] and [the other elements]
+                - an array with nothing as there are no elements say less than the pivot, and an array with all the elements more than the pivot.
+        
+        Stable?
+            No, swapping elements can put them out of order when partitioning.
+            It can be made stable through certain adjustments.
+        
+        Adaptive?
+            Clearly not.
+        
+        Deterministic?
+            Yes, but not when a pivot is randomly selected, or relies on randomness in general.
+            choosing the leftmost element as pivot is deterministic
+            randomly picking an element is stochastic - not deterministic
+
+        
