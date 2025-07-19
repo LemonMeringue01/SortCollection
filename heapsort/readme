@@ -1,0 +1,187 @@
+"""
+Heap Sort - python, java and c versions
+
+About Heap Sort:
+    Inventor:
+        J.W.J. Williams in 1964
+        Also the inventor of the binary heap data structure in 1963.
+        from wikipedia, he was also connected to Tony Hoare through his work:
+            "In England, he worked as a programmer for Elliot Automation,
+            formerly Elliot Brothers (London) Limited, where he invented heapsort and used it to create the event-driven 
+            Elliott Simulator Package (ESP) with the help of C. A. R. (Tony) Hoare."     
+
+    Idea behind process:
+        Comparison based. Somewhat similar, improved from selection sort.
+    
+    Benefits:
+        in-place, time complexity is the same in all cases, as a result of the heap structure. Simple, not using recursion.
+    
+    Process:  **this is dreadful. Go read something else.
+        This requires understanding the COMPLETE binary tree data structure, and the heap (max or min) data structure
+        In a binary tree data structure, 
+            elements are nodes. They can have at most 2 child nodes which branch off to the left or 
+            right(in visual rep anyway)
+            This makes the node a 'parent' element - having 'child' nodes.   
+            The linking of these elements is generally achieved through pointers
+                **recall that in a binary search tree, the left child node of a parent node will have a value less than the parent node's,
+                while the right child node will have a value more than its parent. This is not necessarily the case in a simple binary tree.
+
+            Example:
+                Binary tree(up to 2 child nodes for each node)
+                    6
+                   / \
+                  3   1
+                 /\   \
+                5  3   7
+
+                Complete Binary tree(the tree is filled left to right - each level is filled left to right. 
+                    Each level, except the last, needs to be full. 
+                    say for input [4,7,3,1,5,3,8,5], 4 becomes root, 7 and 3 become children of root, (1,5),(3,8) 
+                    become children of 7 and 3. See that 5 is left over? the bottom level does not need to be filled completely.
+
+                    [4,7,3,1,5,3,8,5] 
+                    is kind of [4,  7,3,  1,5,3,8,  5]
+                    1,2,4 elements per level, and then 1 left over.
+                            4            level full
+                           / \
+                          7   3          level full
+                         /\   |\
+                        1 5  3  8        level full
+                       /
+                      5                  level not full 
+
+                Perfect Binary Tree    
+                    To complicate it further, if there were enough elements, 8, to fill the next level after (1,5),(3,8),
+                    that would make a 'perfect binary tree'.                           
+                    [8,4,7,4,2,7,7,3,0,8,2,4,5,7,4] 
+                    is then [8,  4,7,  4,2,7,7,  3,0,8,2,4,5,7,4]
+                    1,2,4,8 - no leftovers.
+                    
+                    Number of nodes at level n = 2^n     can then be used, as each level is filled.)
+
+                            8
+                          /   \
+                        4      7
+                       /\      | \
+                      4  2     7  7
+                    /|   |\   /|  |\
+                   3 0  8 2  4 5  7 4 
+
+
+
+                see also full binary tree (online or somewhere)
+
+                Binary Search Tree(left children are less than their parent, right children are more than their parent). 
+                Not necessarily a complete binary tree.
+                    6
+                   / \
+                  3   8
+                 /\   |\
+                1 7  4  9
+               /    /\
+              0    2  7
+
+                **see also 'balanced' binary tree(online or elsewhere, I'm done.)
+
+        The heap data structure is essentially a binary tree which fulfills a certain property, 
+            this being either the 'max' or 'min' heap property:
+                in a max heap, the root element/node is the largest value of the tree. Its children, if it has any, will have 
+                values less than or equal to it. The same goes for the children of these children 
+                - Child nodes' values are less than their parents'.
+                in a min heap the opposite is true - Child nodes' values are more than or equal to their parents'.
+                    **unlike a binary search tree, left and right children have no distinction - just that they are less than the parent node.
+            the [0]th element is the root of the structure.
+
+    *       The Binary Heap - the structure used for Heapsort, is a heap which is also a complete binary tree. As above, this means 
+    *       each level is filled left to right. 
+    *       each level, except the last, needs to be full - each node has 2 child nodes.
+    *       Don't ask me why there are so many data structures, this is barely tapping the surface.
+
+        Can you see how a structure where the max or minimum element is the root, the [0]th element, would be useful for sorting?
+        Heaps can be represented as arrays
+        example - max heap: [9,7,5,3,5,2,1,2,3]
+            can be represented as:
+                    9           [9]
+                   / \  
+                  7   5         [7,5]
+                 /\   |\
+                3  5  2 1       [3,5,2,1]
+               /\
+              2  3              [2,3]
+
+            An attempt to add to explanation:  
+                Think of this like a family tree? 
+    
+                  grandparent
+                  |        \
+                parent      parent
+                /   \        |   \
+            child child  child child
+              /\
+    grandchild grandchild
+                                        each type of child is a 'generation' at that level and is grouped as such. 
+                                        so it's like [grandparents, parents, children, grandchildren]?
+    
+                                        
+        Anyway - back to heapsort. Again this uses the 'binary heap' structure.
+        This can be either a max heap or min heap.
+        The process is basically - 
+        take in elements - this is generally as an array.
+        make the array into a max or min heap. - for keeping the process clear you may have a seperate function for this - 'buildMaxHeap' - 
+            for instance, or you could just have the logic within the main function 'heapSort'.
+    *This bit is generally done in a loop    
+        extract the root from the newly made heap. This will be the maximum, or minimum value of the array, depending on if it's a max
+            or min heap.
+        put this into a 'sorted' section - within the heap-ed array - this makes it in-place. For the first min element found
+            it will take the [0]th place , the next min found becomes the [1]th element, and so on. Use the loop logic to track this. 
+        Make the heap into a heap again - having removed the root, the new root - [0]th element - may not be the max or min element anymore.
+        This is again generally done with a seperate function, 'Heapify' or such.
+    *endloop
+        Return the 'sorted' array.
+
+        The 'Heapify' function has its own logic, and is generally recursive.
+        The whole Heapsort function can be made iterative. Know that as usual this generally uses while loops.
+
+    Illustration:
+        input array [5,8,1,2,4]
+        make into a min heap:
+                1
+               / \
+              2   5
+             / \
+            8   4                [I think? not a guarantee, the logic is annoying with this]
+        =[1,2,5,8,4]
+        1 is now in the 'sorted' section ----- array = [1,.....]
+            **if using a max heap the root needs to be swapped to the end - working backwards in creating a 'sorted' section - [....,9], [....,7,9]
+        make the rest a min heap again:
+                2
+               / \
+              4   8
+             /
+            5                    [it could really be something else.]
+        =[2,4,8,5]    
+        2 is now in the 'sorted' section ----- array = [1,2,....] 
+            do this stuff again until...
+        sorted = [1,2,4,5,8]
+
+
+    Extra Details:
+        In-Place?
+            Yes, generally - Certain versions make differences.
+            Space complexity thereby O(1) 
+        Complexity?
+            O(nlogn) all cases.
+        
+        Stable?
+            No, swapping in order to sort elements can put them out of order.
+        
+        Adaptive?
+            Not unless it's a specific version - Adaptive Heapsort. Regular heapsort always assumes the heap is unsorted.
+        
+        Deterministic?
+            Yes.
+
+
+
+
+"""
