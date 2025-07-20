@@ -19,22 +19,22 @@ About Heap Sort:
     Process:  **this is dreadful. Go read something else.
         This requires understanding the COMPLETE binary tree data structure, and the heap (max or min) data structure
         In a binary tree data structure, 
-            elements are nodes. They can have at most 2 child nodes which branch off to the left or 
+            elements are nodes. They can have at most 2(owing to the name 'binary') child nodes which branch down to the left or 
             right(in visual rep anyway)
             This makes the node a 'parent' element - having 'child' nodes.   
             The linking of these elements is generally achieved through pointers
                 **recall that in a binary search tree, the left child node of a parent node will have a value less than the parent node's,
                 while the right child node will have a value more than its parent. This is not necessarily the case in a simple binary tree.
 
-            Example:
+            Some types of Binary trees:
                 Binary tree(up to 2 child nodes for each node)
                     6
                    / \
                   3   1
-                 /\   \
-                5  3   7
+                 /\    \
+                5  3    7
 
-                Complete Binary tree(the tree is filled left to right - each level is filled left to right. 
+                COMPLETE Binary tree(the tree is filled left to right - each level is filled left to right. 
                     Each level, except the last, needs to be full. 
                     say for input [4,7,3,1,5,3,8,5], 4 becomes root, 7 and 3 become children of root, (1,5),(3,8) 
                     become children of 7 and 3. See that 5 is left over? the bottom level does not need to be filled completely.
@@ -50,7 +50,7 @@ About Heap Sort:
                        /
                       5                  level not full 
 
-                Perfect Binary Tree    
+                PERFECT Binary Tree    
                     To complicate it further, if there were enough elements, 8, to fill the next level after (1,5),(3,8),
                     that would make a 'perfect binary tree'.                           
                     [8,4,7,4,2,7,7,3,0,8,2,4,5,7,4] 
@@ -69,15 +69,15 @@ About Heap Sort:
 
 
 
-                see also full binary tree (online or somewhere)
+                see also FULL binary tree (online or somewhere)
 
-                Binary Search Tree(left children are less than their parent, right children are more than their parent). 
-                Not necessarily a complete binary tree.
+                Binary SEARCH Tree(left children are less than their parent, right children are more than their parent). 
+                Not necessarily a Complete binary tree.
                     6
                    / \
                   3   8
-                 /\   |\
-                1 7  4  9
+                 /\   |
+                1 7  4  
                /    /\
               0    2  7
 
