@@ -1,5 +1,89 @@
 Counting Sort - Python, Java and C versions
 
 About Counting Sort:
-    inventor:
+    Inventor:
+        Harold H Seward, 1954
+    
+    Idea behind process:
+        non comparison-based, focused on situations where input has a small range of values, eg[5,6,4,6,4,4,5,5,4], range 4-6.
+        Also specifically for integer values, cannot be used on decimals.
+    
+    Benefits:
+        As above, will be quicker in that situation. Easy to code and stable.
+
+    Process:
+        Assume the values of the input array are between 0 and some max integer. Also that all elements are integers.
+        Three arrays are involved:
+            The input array
+            An array that counts occurences of each value in the input array
+            An output array which will contain the elements of the input array, in their sorted order.
         
+        Steps:
+            - Find the maximum value of the input array and use it to create an array with length according to the range this creates.
+                If the max is 3, that means the range of possible values is 0-3, or 0,1,2,3.
+                The length of the array to be created and filled with placeholder 0s is 3+1 elements long. 
+                0 1 2 3
+               [0,0,0,0]
+                            **an optimization therefore can be to find both the max and MIN values, as the created array may be too long - 
+                            the array may have 11,12 and 13 as values, but no values <11, so an array 14 elements long is too many for the range. 
+            
+            - Count the occurences of each value in the input array, and update each element of the array created above to reflect this.
+                eg. [4,2,1,1,2,0,4,3,2,3] input array
+                     
+        *value range  0 1 2 3 4                    0 1 2 3 4
+        *counts      [0,0,0,0,0] created      ==> [1,2,3,2,2] now with counts of each in the corresponding indices. value 2 occurs 3 times.
+
+            - This bit is finding the running or 'cumulative' sum of the elements of this occurences array.
+                for every element in the occurences array, each element becomes itself plus the value of the element before it.
+                work left to right for this, 0 to n. [3,4,2,3] becomes [none+3, (3)+4, (3+4)+2, (3+4+2)+3] becomes [3,7,9,12]
+                The logic here becomes clearer when viewing descriptions like https://www.geeksforgeeks.org/dsa/counting-sort/ 
+            
+            - Create an output array the same length as the input array - will store the sorted elements
+
+            - Use this adjusted occurences array to create the output array
+                For the length of the input array:
+                    Traverse the input array from back to front -> i = n-1 to 0.
+                    for each element, use the occurences array to find the index,place to insert the value in the output array.
+                    the operation for this is:
+
+                    outputArray[occurenceArray[arr[i]]-1] = inputArray[i]
+                                recall that occurence array's indexes are based on the values of the input array.
+                                again, view a visualisation somewhere.
+                    You work backwards to maintain stability - retain relative order of elements.
+
+
+
+        Illustration:
+            To be added if I can be bothered.
+
+        Extra Details:
+            In-Place?
+                Decidedly not. The arrays created for occurence counting, and the output array, these auxiliary/helper arrays contribute to a 
+                high space requirement.
+                Space Complexity:
+                    O(n+m)   n being range, space for occurence array, m being the size of the original array, for the output array.
+            
+            Complexity?
+                O(n+m), again owing to the range and length of the input array.
+                This is for best, worst and average case.
+
+            Stable?
+                Yes, that is one of its advantages.
+            
+            Adaptive?
+                No
+
+            Deterministic?
+                Yes, no randomness - same output for same input.             
+                
+
+                                
+            
+
+
+                     
+                
+
+
+
+    

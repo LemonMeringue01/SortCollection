@@ -168,7 +168,9 @@ About Heap Sort:
     Extra Details:
         In-Place?
             Yes, generally - Certain versions make differences.
-            Space complexity thereby O(1) 
+            Space complexity:
+                thereby O(1) 
+                
         Complexity?
             O(nlogn) all cases.
         
