@@ -1,0 +1,70 @@
+Radix Sort - python, java and c versions
+
+About Radix Sort:
+    Inventor:
+        Herman Hollerith in 1887, "German-American statistician, inventor, and businessman who developed
+        an electromechanical tabulating machine for punched cards to assist in summarizing 
+        information and, later, in accounting." Invented the algorithm, which was then used to sort punch cards. [wikipedia]
+
+        Harold H Seward, also the inventor of counting sort, later further developed this in 1954 to be a memory efficient computer algorithm.
+
+    Idea behind process:
+        non-comparison based.
+        This one uses a STABLE sort as a subroutine, commonly counting sort.
+
+    benefits:   from https://www.geeksforgeeks.org/dsa/applications-advantages-and-disadvantages-of-radix-sort/
+        Radix sort has a LINEAR TIME COMPLEXITY, which makes it faster than comparison-based sorting algorithms such as quicksort and merge sort for large data sets.
+        It is a STABLE sorting algorithm, meaning that elements with the same key value maintain their relative order in the sorted output.
+        Radix sort is EFFICIENT for sorting LARGE NUMBERS OF integers or strings.
+        It CAN be EASILY PARALLELIZED.
+
+    Process:
+        working through the digits of each value, 9, 3, 6  | 936
+                                                  5, 3, 7  | 537
+                                                  3, 4, 4  | 344  
+        
+        putting them in order (using a stable sort method) working from the least significant digit(right to left):
+                                                  3, 4, *4  | 344
+                                                  9, 3, *6  | 936
+                                                  5, 3, *7  | 537
+                                                        |
+                                                        v
+                                                  9, *3, 6  | 936
+                                                  5, *3, 7  | 537
+                                                  3, *4, 4  | 344
+                                                        |
+                                                        v
+                                                  *3, 4, 4  | 344
+                                                  *5, 3, 7  | 537
+                                                  *9, 3, 6  | 936
+
+
+    Extra Details:
+        In-place?
+            no, needs 'buckets' for each digit value, and due to the need to copy elements back into the array.
+            Space Complextity:
+                O(n+b)   where n is the number of elements in input, and b is the 'base of the number system'  https://www.geeksforgeeks.org/dsa/radix-sort/
+                
+        Complexity?
+            O(d * (n+b)) where d is the number of digits, n is the number of elements and b is the base of the number system being used.
+
+        Stable?
+            yes - specifically you need to utilize a stable sort algorithm within it.
+        
+        Adaptive?
+            no..?
+        
+        Deterministic?
+            yeah.
+
+
+woo, let's get this done with.
+
+
+
+
+
+
+                                                
+
+
